@@ -23,16 +23,80 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/notice_container"
+            android:orientation="vertical"
+            android:background="@color/blueDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:padding="15dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="IMPORTANT: The Identification returns an error since I am still awaiting my personal developer account validation by Huawei which can take 1-2 business days. Please check out the code on Github."/>
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blueDark"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/blueDark"
+            android:text="Tap To see the Integration"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:padding="15dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:lines="2"
+                android:text="To use HMS DriveKit, please connect with your Huawei ID"/>
+
+            <com.huawei.hms.support.hwid.ui.HuaweiIdAuthButton
+                android:id="@+id/huaweiLoginBtn"
+                android:layout_marginTop="15dp"
+                app:layout_constraintTop_toBottomOf="@id/generic_description_txt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/generic_description_txt"
             android:text="Hello World!"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+<!--        &lt;!&ndash; Huawei Login with ID button which is required for DriveKit&ndash;&gt;-->
+<!--        <com.huawei.hms.support.hwid.ui.HuaweiIdAuthButton-->
+<!--            android:id="@+id/huaweiLoginBtn"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/generic_description_txt"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            />-->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
