@@ -8,6 +8,12 @@ The services that I showcased:
 This is required also to use the Drive Kit and upload files
 2. *HUAWEI Drive Kit* Allowing users to upload files to Huawei Drive. [Lean More](https://developer.huawei.com/consumer/en/doc/development/HMS-Guides/drivekit-introduction)
 
+
+## Features
+1. Login with Huawei
+2. Allows picking files from device internal storage.
+3. Upload selected file to Huawei Drive
+
 ## Technical Details
 
 ### Dev Environment
@@ -31,6 +37,9 @@ I have build an apk that can be directly installed on any device meeting the req
 2. Open the downloaded file and choose install ([https://android.gadgethacks.com/how-to/android-101-sideload-apps-by-enabling-unknown-sources-install-unknown-apps-0161947/](You might need to allow apps from unknown sources)) on some devices
 
 _You can also clone this project and open the project with Android Studio._
+
+
+---
 
 
 ## Improvements & Limitations
