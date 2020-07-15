@@ -36,19 +36,28 @@
             android:layout_height="wrap_content">
             <TextView
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:textAlignment="center"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:text="IMPORTANT: The Identification returns an error since I am still awaiting my personal developer account validation by Huawei which can take 1-2 business days. Please check out the code on Github."/>
+                android:text="@string/important"/>
+            <TextView
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/notice_text_huawei_dev"/>
 
         <Button
+
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blueDark"
             android:backgroundTint="@color/white"
             android:textColor="@color/blueDark"
-            android:text="Tap To see the Integration"/>
+            android:id="@+id/notice_learn_more"
+            android:text="@string/notice_text_bottom"/>
         </LinearLayout>
 
         <LinearLayout

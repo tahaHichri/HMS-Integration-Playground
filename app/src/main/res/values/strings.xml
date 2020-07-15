@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">HMS Playground</string>
     <string name="no_more_actions">No More Actions</string>
+    <string name="notice_text_bottom">Tap To see the Integration</string>
+    <string name="notice_text_huawei_dev">I am still awaiting my personal developer account validation by Huawei which can take 1-2 business days. That is why the Login with Huawei returns an error. Please check out the code on Github.</string>
+    <string name="important">IMPORTANT!</string>
 </resources>
