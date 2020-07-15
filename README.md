@@ -1,5 +1,18 @@
 # HMS Playground
 
+
+
+## Table of Contents
+
+ * [Concepts](#concepts)
+ * [Features](#features)
+ * [Technical Details](#technical-details )
+ * [Integration Process](#integration-process)
+ * [Improvements & Limitations](#improvements--limitations)
+ * [Sources Used](#sources-used)
+
+
+
 ## Concepts
 This project is an Android application that showcases Huawei Mobile Services SDK(HMS) integration with Android.
 
@@ -125,7 +138,7 @@ allprojects {
 
 ## Improvements & Limitations
 
-Accessing Huawei Suite programmatically requires an activated developer account[https://developer.huawei.com/consumer/en/doc/drivekit-devpreparations](Check out the Preparation guide for more infos). This can take 1-2 business days.
+Accessing Huawei Suite programmatically requires an activated developer account [https://developer.huawei.com/consumer/en/doc/drivekit-devpreparations](Check out the Preparation guide for more infos) . This can take 1-2 business days.
 Since this is my own developer account, it took some time for the identity validation process to be done.
 
 This will prevent the Account Kit from working. I will try to improve it once my account it validated.
