@@ -28,13 +28,10 @@
 
     <!--    BottomNavigationView Theme  -->
     <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+
     </style>
 
-    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
-        <item name="colorPrimary">@color/foodvsr_accent</item>
-        <item name="colorOnPrimary">@color/foodvsr_accent</item>
-    </style>
+
     <!--    End BottomNavigationView -->
 
 

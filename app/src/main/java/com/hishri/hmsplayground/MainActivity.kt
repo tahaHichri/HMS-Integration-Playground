@@ -8,7 +8,6 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.hishri.hmsplayground.extension.showSnackbar
@@ -18,7 +17,6 @@ import com.huawei.cloud.base.util.StringUtils
 import com.huawei.cloud.client.exception.DriveCode
 import com.huawei.cloud.services.drive.Drive
 import com.huawei.cloud.services.drive.DriveScopes
-import com.huawei.cloud.services.drive.model.File
 import com.huawei.hms.common.ApiException
 import com.huawei.hms.support.api.entity.auth.Scope
 import com.huawei.hms.support.hwid.HuaweiIdAuthAPIManager
@@ -30,6 +28,7 @@ import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.io.File
 import java.util.*
 
 
@@ -39,9 +38,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mCredential: DriveCredential
     private lateinit var accessToken: String
     private lateinit var unionId: String
-    private var directoryCreated: File? = null
-    private var fileUploaded: File? = null
+    private var directoryCreated: com.huawei.cloud.services.drive.model.File? = null
+    private var fileUploaded: com.huawei.cloud.services.drive.model.File? = null
+
     private lateinit var fileSearched: File
+
+    private var pickedFile: File? = null
 
 
     // permissions for accessing storage and camera
@@ -54,6 +56,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private val MIME_TYPE_MAP: MutableMap<String, String> = HashMap()
         private const val REQUEST_SIGN_IN_LOGIN = 999
+        private const val PICKFILE_RESULT_CODE = 991
         private const val TAG = "MainActivity"
 
         // accepted MIME types
@@ -102,6 +105,23 @@ class MainActivity : AppCompatActivity() {
             driveLogin()
         }
 
+        // check if there is a file selected, and upload it to drive
+        uploadToDriveBtn.setOnClickListener {
+            pickedFile?.let {
+                uploadFiles()
+            } ?:run {
+                uploadToDriveBtn.showSnackbar("Please select a file.", 5000)
+            }
+        }
+
+        // select file for upload
+        selectFileBtn.setOnClickListener {
+            var chooseFile = Intent(Intent.ACTION_GET_CONTENT)
+            chooseFile.type = "*/*"
+            chooseFile = Intent.createChooser(chooseFile, "Choose a file")
+            startActivityForResult(chooseFile, PICKFILE_RESULT_CODE)
+        }
+
     }
 
 
@@ -138,6 +158,8 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         Log.i(TAG, "onActivityResult, requestCode = $requestCode, resultCode = $resultCode")
         when (requestCode) {
+
+            // Login result
             REQUEST_SIGN_IN_LOGIN -> {
                 val authHuaweiIdTask =
                     HuaweiIdAuthManager.parseAuthResultFromIntent(data)
@@ -161,6 +183,16 @@ class MainActivity : AppCompatActivity() {
                         ":( Developer account still Pending validation. Please check the notice below.",
                         10000
                     )
+                }
+            }
+
+            PICKFILE_RESULT_CODE ->{
+                if (resultCode == -1) {
+                    data?.data?.path?.let {
+                        pickedFile = File(it)
+                        selectedFileName.text= it
+                    }
+
                 }
             }
         }
@@ -195,51 +227,42 @@ class MainActivity : AppCompatActivity() {
 
 
     //Function to Upload files
-    @SuppressLint("SdCardPath")
+
     private fun uploadFiles() {
-//        GlobalScope.launch {
-//            try {
+        GlobalScope.launch {
+            try {
 //                if (accessToken == null) {
 //                    showTips("please click 'Login'.")
 //                    return@launch
 //                }
-//                if (StringUtils.isNullOrEmpty(
-//                        uploadFileName.text.toString()
-//                    )
-//                ) {
-//                    showTips("Please input upload file name above.")
-//                    return@launch
-//                }
-//                val fileObject = java.io.File("/sdcard/" + uploadFileName.text)
-//                if (!fileObject.exists()) {
-//                    showTips("The input file does not exit.")
-//                    return@launch
-//                }
-//                val appProperties: MutableMap<String, String> =
-//                    HashMap()
-//                appProperties["appProperties"] = "property"
-//                // create somepath directory
-//                File().setFileName("somepath" + System.currentTimeMillis())
-//                    .setMimeType("application/vnd.huawei-apps.folder").appSettings =
-//                    appProperties
-//                directoryCreated = buildDrive()?.files()?.create(File())?.execute()
-//                // create test.jpg on cloud
-//                val mimeType = mimeType(fileObject)
-//                val content = File()
-//                    .setFileName(fileObject.name)
-//                    .setMimeType(mimeType)
-//                    .setParentFolder(listOf(directoryCreated?.id))
-//                fileUploaded = buildDrive()?.files()
-//                    ?.create(content, FileContent(mimeType, fileObject))
-//                    ?.setFields("*")
-//                    ?.execute()
-//                showTips("upload success")
-//            } catch (ex: Exception) {
-//                Log.d(TAG, "upload", ex)
-//                showTips("upload error $ex")
-//            }
-//
-//        }
+
+                val fileObject = pickedFile
+
+                val appProperties: MutableMap<String, String> =
+                    HashMap()
+                appProperties["appProperties"] = "property"
+                // create somepath directory
+                com.huawei.cloud.services.drive.model.File().setFileName("somepath" + System.currentTimeMillis())
+                    .setMimeType("application/vnd.huawei-apps.folder").appSettings =
+                    appProperties
+                directoryCreated = buildDrive()?.files()?.create(com.huawei.cloud.services.drive.model.File())?.execute()
+                // create test.jpg on cloud
+                val mimeType = mimeType(fileObject)
+                val content = com.huawei.cloud.services.drive.model.File()
+                    .setFileName(fileObject?.name)
+                    .setMimeType(mimeType)
+                    .setParentFolder(listOf(directoryCreated?.id))
+                fileUploaded = buildDrive()?.files()
+                    ?.create(content, FileContent(mimeType, fileObject))
+                    ?.setFields("*")
+                    ?.execute()
+                notice_container.showSnackbar("upload success",9000)
+            } catch (ex: Exception) {
+                Log.d(TAG, "upload", ex)
+                notice_container.showSnackbar("upload error, cause: $ex",9000)
+            }
+
+        }
     }
 
     private fun buildDrive() = Drive.Builder(mCredential, this).build()
