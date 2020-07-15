@@ -74,13 +74,60 @@ dependencies {
 
 ```
 
+2. projects.gradle
+
+```
+
+buildscript {
+    ext.kotlin_version = "1.3.72"
+     repositories {
+
+          // huawei deps repository
+          maven { url 'https://developer.huawei.com/repo/' }
+
+          // ...
+
+        }
+        dependencies {
+          //...
+
+          // Huawei connect
+          classpath 'com.huawei.agconnect:agcp:1.2.1.301'
+
+        }
+
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+
+            maven {url 'http://developer.huawei.com/repo/'}
+        }
+}
+
+```
+
+3. agconnect-services.json
+Please see "Limitations" section for further description
+
+
+---
+
+
+
+
 
 ## Improvements & Limitations
 
 Accessing Huawei Suite programmatically requires individual dev acc
 
 
+
 ## Sources Used
+
+
 
 
 
