@@ -109,8 +109,12 @@ allprojects {
 
 ```
 
-3. agconnect-services.json
-Please see "Limitations" section for further description
+
+
+3. _agconnect-services.json_ Under app/ directory
+
+
+*Please see "Limitations" section for further description*
 
 
 ---
@@ -121,12 +125,22 @@ Please see "Limitations" section for further description
 
 ## Improvements & Limitations
 
-Accessing Huawei Suite programmatically requires individual dev acc
+Accessing Huawei Suite programmatically requires an activated developer account[https://developer.huawei.com/consumer/en/doc/drivekit-devpreparations](Check out the Preparation guide for more infos). This can take 1-2 business days.
+Since this is my own developer account, it took some time for the identity validation process to be done.
+
+This will prevent the Account Kit from working. I will try to improve it once my account it validated.
+
+
+---
 
 
 
 ## Sources Used
+These are the sources I used for this project
 
+1. [HMS Account Kit developer guide](https://developer.huawei.com/consumer/en/doc/account-preparation)
+2. [HMS Drive Kit developer guide](https://developer.huawei.com/consumer/en/doc/drivekit-devpreparations)
+3. [HMS Drive Kit Codelab](https://developer.huawei.com/consumer/en/codelab/HMSDriveKit-Kotlin/index.html#1)
 
 
 
