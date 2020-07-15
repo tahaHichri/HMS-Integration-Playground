@@ -231,10 +231,6 @@ class MainActivity : AppCompatActivity() {
     private fun uploadFiles() {
         GlobalScope.launch {
             try {
-//                if (accessToken == null) {
-//                    showTips("please click 'Login'.")
-//                    return@launch
-//                }
 
                 val fileObject = pickedFile
 
@@ -259,7 +255,16 @@ class MainActivity : AppCompatActivity() {
                 notice_container.showSnackbar("upload success",9000)
             } catch (ex: Exception) {
                 Log.d(TAG, "upload", ex)
-                notice_container.showSnackbar("upload error, cause: $ex",9000)
+
+                if (!::mCredential.isInitialized){
+                    notice_container.showSnackbar(
+                        ":( Developer account still Pending validation. Please check the notice below.",
+                        10000
+                    )
+                } else {
+                    notice_container.showSnackbar("upload error, cause: $ex",9000)
+                }
+
             }
 
         }
