@@ -23,12 +23,21 @@ import com.huawei.hms.support.hwid.service.HuaweiIdAuthService;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.huawei.hms.analytics.HiAnalytics;
+import com.huawei.hms.analytics.HiAnalyticsInstance;
+import com.huawei.hms.analytics.HiAnalyticsTools;
+import static com.huawei.hms.analytics.type.HAEventType.*;
+import static com.huawei.hms.analytics.type.HAParamType.*;
+
+
 import static com.huawei.hms.support.hwid.request.HuaweiIdAuthParams.DEFAULT_AUTH_REQUEST_PARAM;
 
 public class MainJavaActivity extends AppCompatActivity {
 
     private final static String HmsTAG = "HMS:: ";
     private static int REQUEST_SIGN_IN_LOGIN = 1302;
+
+    HiAnalyticsInstance instance;
 
 
     @Override
@@ -37,7 +46,38 @@ public class MainJavaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_java);
 
 
-        huaweiLogin();
+        //huaweiLogin();
+
+
+        HiAnalyticsTools.enableLog();
+        // Generate the Analytics Instance
+        instance = HiAnalytics.getInstance(this);
+
+        instance.setUserProfile("sss", "mmm");
+        reportAnswerEvt("");
+        postScore();
+    }
+
+
+    private void reportAnswerEvt(String answer) {
+
+        // Initialize parameters.
+        Bundle bundle = new Bundle();
+
+        bundle.putString("testanal","Ramm");
+
+        // Report a customized event.
+        instance.onEvent("Answer", bundle);
+    }
+
+
+    private void postScore() {
+
+        Bundle bundle = new Bundle();
+        bundle.putLong(SCORE, 666);
+
+        // Report a predefined Event
+        instance.onEvent(SUBMITSCORE, bundle);
     }
 
 

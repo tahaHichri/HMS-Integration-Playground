@@ -16,6 +16,8 @@ buildscript {
 
         // Huawei connect
         classpath 'com.huawei.agconnect:agcp:1.2.1.301'
+
+        classpath 'com.huawei.hms.plugin:analytics:5.0.1.300'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

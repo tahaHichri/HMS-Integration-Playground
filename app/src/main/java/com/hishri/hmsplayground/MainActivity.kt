@@ -129,7 +129,7 @@ class MainActivity : AppCompatActivity() {
      * Launch the login with ID process for result
      */
     private fun driveLogin() {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        //fAppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         val scopeList: MutableList<Scope> = ArrayList()
 
         scopeList.apply {

@@ -7,6 +7,8 @@ apply from: '../dependencies.gradle'
 
 // huawei gradle plugin
 apply plugin: 'com.huawei.agconnect'
+apply plugin: 'com.huawei.hms.plugin.analytics'
+
 
 android {
     compileSdkVersion 29
@@ -44,6 +46,8 @@ dependencies {
      */
     implementation 'com.huawei.hms:drive:4.0.0.301'         // driveKit
     implementation 'com.huawei.hms:hwid:4.0.0.300'          // Core
+
+    implementation 'com.huawei.hms:hianalytics:5.0.1.301'
 
     implementation "com.jakewharton.timber:timber:$versions.timber"
 
